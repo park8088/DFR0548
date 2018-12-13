@@ -1,14 +1,9 @@
-'''
-DC모터 1개를 돌려보는 프로그램. 하단에 자세한 설명 있음.
-'''
-
 from microbit import *
 import math
 
 DFMotorInit = 0#DC모터 제어를 위해서 이것을 추가해야 함
 
 #---------------DFR0548보드 제어용 라이브러리 시작--------------#
-
 class DFdriver:#보드 공통적으로 쓰이는 클래스
   def __init__(self,freq,init):
     self.I2C = i2c
@@ -105,27 +100,12 @@ class DFMotor:#DC모터용 클래스
   def stopAll(self):
     for i in range(1,4):
       self.stop(i)
-
 #---------------DFR0548보드 제어용 라이브러리 끝--------------#
-'''
-본 프로그램 시작. 모터를 여러 개 돌리려면
-motor.run(2,motor.CW)
-motor.run(3,motor.CW)
-이런 식으로 추가하면 됨. 멈출 때도 역시 모터 번호 별로 멈춤.
-motor.CW는 전진, motor.CCW는 후진
-motor.runAll(motor.CCW)나 motor.stopAll()처럼 모든 모터를 제어할 수도 있음.
-'''
 motor = DFMotor()# 모터 라이브러리 초기화
 
 while True:
     if button_a.is_pressed():#버튼a를 누르면
         motor.speed(200)#모터속도 200설정
         motor.run(1,motor.CW)#1번모터를 전진(CW)
-        sleep(1000)#1초 대기
-        motor.stop(1)#1번모터 정지
     elif button_b.is_pressed():
-        motor.speed(150)#모터속도 150설정
-        motor.runAll(motor.CCW)#모든 모터를 후진(CCW)
-        sleep(1000)#1초 대기
         motor.stopAll()#모든 모터 정지
-        
