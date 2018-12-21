@@ -1,9 +1,8 @@
 from microbit import *
 import math
 
-DFMotorInit = 0#DC모터 제어를 위해서 이것을 추가해야 함
+DFMotorInit = 0
 
-#---------------DFR0548보드 제어용 라이브러리 시작--------------#
 class DFdriver:#보드 공통적으로 쓰이는 클래스
   def __init__(self,freq,init):
     self.I2C = i2c
@@ -100,8 +99,8 @@ class DFMotor:#DC모터용 클래스
   def stopAll(self):
     for i in range(1,4):
       self.stop(i)
-#---------------DFR0548보드 제어용 라이브러리 끝--------------#
-motor = DFMotor()# 모터 라이브러리 초기화
+
+motor = DFMotor()# 모터 모듈 초기화
 
 while True:
     if button_a.is_pressed():#버튼a를 누르면
